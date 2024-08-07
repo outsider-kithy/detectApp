@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native';
 import * as tf from '@tensorflow/tfjs';
 import { fetch, decodeJpeg } from '@tensorflow/tfjs-react-native';
 import * as mobilenet from '@tensorflow-models/mobilenet';
@@ -25,8 +25,14 @@ const App = () => {
       const imageTensor = decodeJpeg(imageData);
       const prediction = await model.classify(imageTensor);
       if (prediction && prediction.length > 0) {
+        let predictionArray = [];
+        for(let i = 0; i < prediction.length; i++){
+          console.log(prediction[i]);
+          predictionArray.push(prediction[i].className);
+        }
+
         setResult(
-          `${prediction[0].className} (${prediction[0].probability.toFixed(3)})`
+          `${predictionArray.join(", ")}`
         );
       }
     } catch (err) {
@@ -39,25 +45,45 @@ const App = () => {
   }, []);
 
   return (
-    <View
-      style={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Image
-        ref={image}
-        source={require('./assets/myImage.jpg')}
-        style={{ width: 200, height: 200 }}
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.box}>
+        <Image
+          ref={image}
+          source={require('./assets/myImage.jpg')}
+          style={styles.image}
+        />
+      </View>
       {!isTfReady && <Text>Loading TFJS model...</Text>}
       {isTfReady && result === '' && <Text>Classifying...</Text>}
-      {result !== '' && <Text>{result}</Text>}
-    </View>
+      {result !== '' && <Text style={styles.result}>{result}</Text>}
+     </SafeAreaView>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box:{
+    position: 'relative',
+    width: 300,
+    height: 300,
+  },
+  image:{
+    position: 'absolute',
+    top: 0,
+    width: 300,
+    height: 300,
+  },
+  result: {
+    marginTop: 20,
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'red',
+  }
+});
+
 export default App;
+

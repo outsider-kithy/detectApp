@@ -3,13 +3,13 @@ MobileNetを利用して、画像から物体を検出するスマホアプリ
 
 ## バージョン
 
-"@tensorflow-models/mobilenet": "^2.1.1",
-"@tensorflow/tfjs": "^4.20.0",
-"@tensorflow/tfjs-react-native": "^1.0.0",
-"expo": "~51.0.24",
-"expo-status-bar": "~1.12.1",
-"react": "18.2.0",
-"react-native": "0.74.3"
+- "@tensorflow-models/mobilenet": "^2.1.1",
+- "@tensorflow/tfjs": "^4.20.0",
+- "@tensorflow/tfjs-react-native": "^1.0.0",
+- "expo": "~51.0.24",
+- "expo-status-bar": "~1.12.1",
+- "react": "18.2.0",
+- "react-native": "0.74.3"
 
 ## 注意点(2024年8月時点)
 

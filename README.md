@@ -1,6 +1,9 @@
 # React Native(Expo) + TensorFlow.jsで物体検出アプリ
 MobileNetを利用して、画像から物体を検出するスマホアプリ
 
+## デモ画面
+![デモ画面](demo_img.PNG)
+
 ## バージョン
 
 - "@tensorflow-models/mobilenet": "^2.1.1",
